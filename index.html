@@ -3,43 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>		
 		<title>Шифрование сообщений ВКонтакте</title>
-		<link href="css/style.css" rel="stylesheet">
 		<meta charset="utf-8">		
-		<script src="js/pidcrypt_util.js"></script>
-		<script src="js/pidcrypt.js"></script>
-		<script src="js/md5.js"></script>
-		<script src="js/aes_core.js"></script>
-		<script src="js/aes_cbc.js"></script>
 		<script src="js/main.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 	</head>
-
 	<body>
+		<script> 
+		if(isMobile.any())
+		{
+			addCSS("mstyle.css");
+		}
+		else
+		{
+			addCSS("style.css");
+		}
+		</script>
 	    <div id="contact-list">
             <h1 class="block-name" onclick="getDialogs()">Диалоги</h1>
         </div>
-        <a id="getToken" href="https://oauth.vk.com/authorize?client_id=4354044&amp;display=page&amp;redirect_uri=https://oauth.vk.com/blank.html&amp;scope=friends,messages,offline&amp;response_type=token&amp;v=5.44">Получить token</a>
         <div id="message-history">
             <h1 class="block-name" onclick="getHistory()">История сообщений</h1>
             <div id="history"></div>
         </div>
-<<<<<<< HEAD
         <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">
-		<a id="getToken" href="https://oauth.vk.com/authorize?client_id=4354044&amp;display=page&amp;redirect_uri=https://oauth.vk.com/blank.html&amp;scope=friends,messages,offline&amp;response_type=token&amp;v=5.44">Получить token</a>
+		
         <script language="javascript">
 				if(getCookie("access_token") != undefined){
-				document.getElementById("access_token").value = getCookie("access_token");
-                getDialogs();
+					document.getElementById("access_token").value = getCookie("access_token");
+					getDialogs();
 				}
-=======
+		</script> 
+		
         <div class="button" onclick="setAccess_token()"> Загрузить Access-Token </div>
-        <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">
-        <script language="javascript">           
-				if(getCookie("access_token") != undefined){
-				document.getElementById("access_token").value = getCookie("access_token");
-                getDialogs();
-				}				
->>>>>>> parent of 15f5942... minor update
-		</script>        
+		<a href="https://oauth.vk.com/authorize?client_id=4354044&amp;display=page&amp;redirect_uri=https://oauth.vk.com/blank.html&amp;scope=friends,messages,offline&amp;response_type=token&amp;v=5.44">
+			<div class="button"> Получить token </div>
+		</a>
+        <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">      
 	</body>    	
 </html>

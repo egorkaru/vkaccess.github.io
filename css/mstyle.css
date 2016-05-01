@@ -4,32 +4,25 @@ body{
 }
 
 #contact-list{
-    width: 30%;
     min-height: 500px;
     background: rgb(255, 255, 255);
     border: 1px rgba(181, 189, 199, 0.33) solid;
-    display: inline-block;
-    margin: 1em;
-    min-width: 360px;
-}
-
-a{
-	text-decoration: none;
-    color: black;
+    margin: 2em;
 }
 
 .block-name{
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
+    font-size: 4em;
     text-align: center;
     background-color: #7598B7;
     color: white;
     margin-top: 0px;
-    height: 50px;
-    line-height: 50px;
+    height: 12vw;
+    line-height: 12vw;
 }
 .block-name::after{
-    content: "➲";
+    content: "?";
     color: #AAB7C5;
     margin-left: 20px;
 }
@@ -37,7 +30,7 @@ a{
 .friend{
     width: 100%;
     border-top: 1px rgba(181, 189, 199, 0.33) solid;
-    height: 35px;
+    height: 10vw;
 }
 
 .friend:hover {
@@ -45,63 +38,64 @@ a{
 }
 
 .friend.online:after{
-    content: "●";
+    content: "?";
     color: #AAB7C5;
     float: right;
-    line-height: 35px;
-    margin-right: 60px;
+    line-height: 10vw;
+    margin-right: 15%;
+    font-size: 2em;
 }
 .friend.online-mobile:after{
-    content: "📱"; 
+    content: "??";
     color: #AAB7C5;
     float: right;
-    line-height: 35px;
-    margin-right: 60px; 
+    line-height: 10vw;
+    margin-right: 15%;
+    font-size: 2em;
 }
 
 .friend-name{
-    line-height: 35px;
+    line-height: 10vw;
     font-family: 'Roboto', sans-serif;
     margin: auto;
     display: inline-block;
+    font-size: 3em;
 }
 
 .friend-avatar{
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
     vertical-align: top;
-    margin-top: 2px;
+    margin-top: 2.5vw;
     border-radius: 50%;
-    margin-left: 60px;
+    margin-left: 20%;
     margin-right: 30px;
+
 }
 
 #message-history{
-    width: 60%;
     background: rgb(255, 255, 255);
     border: 1px rgba(181, 189, 199, 0.33) solid;
-    float: right;
-    margin: 1em;
+    margin: 2em;
 }
 
 #history {
     border: 1px rgba(181, 189, 199, 0.33) solid;
-    width: 90%;
     position: relative;
     padding: 10px;
     overflow: auto;
     word-wrap: break-word;
-    font-family: Tahoma, Verdana, Arial, Sans-Serif, Lucida Sans;
-    font-size: 0.9em;
+    font-size: 0.7em;
     line-height: 110%;
-    max-height: 80vh;
+    max-height: 160vw;
     margin: 2em;
 }
 
 #history > p {
     margin-top: 10px;
     margin-bottom: 0px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #getToken{

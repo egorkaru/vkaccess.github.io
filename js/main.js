@@ -1,6 +1,28 @@
 ﻿var userInfoById = {};
 var historyId = 0;
 
+// проверка на мобильный браузер
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
 function getHistory(id) {
     delHistory()
     var f_userid = 0;
@@ -13,36 +35,6 @@ function getHistory(id) {
     console.log("Загрузка истории... [" + f_userid + "]");
     addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200');
 }
-
-/*
-function sendMessage () {
-	console.log("Отправка сообщения...");
-	var message = document.getElementById("message").innerHTML;
-	var p = document.getElementById("history");
-	var newMsg = document.createElement("p");
-	if(document.getElementById("isCrypt").checked){
-		
-		var aes = new pidCrypt.AES.CBC();
-		var crypted = aes.encryptText(message, "0125f4fb89b4ab836b65d9b768c4036ce5bf1edbecfade8837c9b18f70fb0cb3", {nBits: 256});
-		newMsg.innerHTML = f_pairname[my_id] + " [Р] : " + message + "<br>";
-		addScript('https://api.vk.com/method/messages.send?user_id=' + f_userid + '&message=' + encodeURIComponent('/cr0/' + crypted) +'&access_token=' + document.getElementById("access_token").value + '&callback=sendMsg');
-		
-	}else{
-		
-		addScript('https://api.vk.com/method/messages.send?user_id=' + f_userid + '&message=' + encodeURIComponent(message) +'&access_token=' + document.getElementById("access_token").value + '&callback=sendMsg');
-		newMsg.innerHTML = f_pairname[my_id] + " : " + message + "<br>";
-		
-	}
-	
-	// Если сообщение не пустое отбражаем
-	if(message != "") p.appendChild(newMsg);
-	
-	// Очистка окна набора сообщения
-	document.getElementById("message").innerHTML = "";
-	historyChange()
-	alert("Сообщение отправлено! :)")
-	console.log("Сообщение отправлено!");
-}*/
 
 function addScript(src) {
     var elem = document.createElement("script");
@@ -172,6 +164,17 @@ function find(array, value) {
     if (array.indexOf) { // если метод существует
         return array.indexOf(value);
     }
+}
+
+
+// подключение css файла
+function addCSS(filename) {
+	var tag_css = document.createElement('link');
+	tag_css.type = 'text/css';
+	tag_css.rel = 'stylesheet';
+	tag_css.href = 'css/' + filename;
+	var tag_head = document.getElementsByTagName('head');
+	tag_head[0].appendChild(tag_css);
 }
 
 
