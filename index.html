@@ -13,11 +13,7 @@
 				addCSS("mstyle.css");
 			}else{			
 				addCSS("style.css");		
-			}
-			if(getCookie("access_token") != undefined) {
-				document.getElementById("access_token").value = getCookie("access_token");
-				getDialogs();
-			}
+			}		
 		</script>
 	    <div id="contact-list">
             <h1 class="block-name" onclick="getDialogs()">Диалоги</h1>
@@ -39,6 +35,10 @@
   				if (scrolled > 70){
 					  addHistory();
 				}
+			}
+			if(getCookie("access_token") != undefined) {
+				document.getElementById("access_token").value = getCookie("access_token");
+				getDialogs();
 			}
 		</script>
 	</body>    	
