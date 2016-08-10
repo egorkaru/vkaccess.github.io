@@ -40,7 +40,7 @@ function getHistory(id) {
 function addHistory() {
     f_userid = historyId;
     console.log("Загрузка истории... [" + f_userid + "]");
-    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200&offeset=' + messageCount);
+    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200&offset=' + messageCount);
 }
 
 function addScript(src) {
