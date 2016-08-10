@@ -25,6 +25,7 @@ var isMobile = {
 };
 
 function getHistory(id) {
+    messageCount = 0;
     delHistory()
     var f_userid = 0;
     f_userid = historyId;
