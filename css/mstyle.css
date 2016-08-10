@@ -21,11 +21,6 @@ body{
     height: 12vw;
     line-height: 12vw;
 }
-.block-name::after{
-    content: "?";
-    color: #AAB7C5;
-    margin-left: 20px;
-}
 
 .friend{
     width: 100%;

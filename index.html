@@ -8,15 +8,16 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<script> 
-		if(isMobile.any())
-		{
-			addCSS("mstyle.css");
-		}
-		else
-		{
-			addCSS("style.css");
-		}
+		<script language="javascript">		
+			if(isMobile.any()) {
+				addCSS("mstyle.css");
+			}else{			
+				addCSS("style.css");		
+			}
+			if(getCookie("access_token") != undefined) {
+				document.getElementById("access_token").value = getCookie("access_token");
+				getDialogs();
+			}
 		</script>
 	    <div id="contact-list">
             <h1 class="block-name" onclick="getDialogs()">Диалоги</h1>
@@ -25,19 +26,20 @@
             <h1 class="block-name" onclick="getHistory()">История сообщений</h1>
             <div id="history"></div>
         </div>
-        <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">
-		
-        <script language="javascript">
-				if(getCookie("access_token") != undefined){
-					document.getElementById("access_token").value = getCookie("access_token");
-					getDialogs();
-				}
-		</script> 
-		
+        <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">	
         <div class="button" onclick="setAccess_token()"> Загрузить Access-Token </div>
 		<a href="https://oauth.vk.com/authorize?client_id=4354044&amp;display=page&amp;redirect_uri=https://oauth.vk.com/blank.html&amp;scope=friends,messages,offline&amp;response_type=token&amp;v=5.44">
 			<div class="button"> Получить token </div>
 		</a>
-        <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">      
+        <input id="access_token" type="text" size="40" value=""style="visibility: hidden;">
+		<script language="javascript">
+			var historyele = document.getElementById('history');
+			historyele.onscroll = function() {
+ 				var scrolled = (historyele.scrollTop /  historyele.scrollHeight) * 100;
+  				if (scrolled > 70){
+					  addHistory();
+				}
+			}
+		</script>
 	</body>    	
 </html>

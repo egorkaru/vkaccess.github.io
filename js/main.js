@@ -1,5 +1,6 @@
 ﻿var userInfoById = {};
 var historyId = 0;
+var messageCount = 0;
 
 // проверка на мобильный браузер
 var isMobile = {
@@ -31,9 +32,15 @@ function getHistory(id) {
     {
         f_userid = id;
         historyId = id;
-    }    
+    }
     console.log("Загрузка истории... [" + f_userid + "]");
     addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200');
+}
+
+function addHistory() {
+    f_userid = historyId;
+    console.log("Загрузка истории... [" + f_userid + "]");
+    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200&offeset=' + messageCount);
 }
 
 function addScript(src) {
@@ -47,6 +54,7 @@ function addScript(src) {
 function showMsg(data) {
     for (var i = 1; i <= data.response.length - 1; i++) {
         writeMessage(data.response[i], false);
+        messageCount++;
     };
     console.log("История загружена!");   
 }
