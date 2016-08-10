@@ -1,6 +1,7 @@
 ﻿var userInfoById = {};
 var historyId = 0;
 var messageCount = 0;
+var historyUpdated = true;
 
 // проверка на мобильный браузер
 var isMobile = {
@@ -58,6 +59,7 @@ function showMsg(data) {
         messageCount++;
     };
     console.log("История загружена!");   
+    historyUpdated = true;
 }
 
 function writeMessage(response, quote) {
