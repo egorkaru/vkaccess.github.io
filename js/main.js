@@ -110,9 +110,9 @@ function writeMessage(response, quote) {
                     document.getElementById("history").appendChild(img);
 
                 } else if (response.attachments[it].type == 'wall') {
-                    var urlpost = "https://new.vk.com/wall" + response.attachments[it].to_id 
+                    var urlpost = "attach: " + "https://new.vk.com/wall" + response.attachments[it].to_id 
                                 + "_" + response.attachments[it].id;
-                    p.appendChild("attach:" + urlpost);
+                    p.appendChild(urlpost);
                 }
             }
         }
