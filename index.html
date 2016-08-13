@@ -32,7 +32,6 @@
 			var historyele = document.getElementById('history');
 			historyele.onscroll = function() {
   				if (historyele.scrollTop + 1000 > historyele.scrollHeight && historyUpdated){
-					  historyUpdated = false;
 					  addHistory();
 				}
 			}

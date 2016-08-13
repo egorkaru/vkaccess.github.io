@@ -1,7 +1,7 @@
 ﻿var userInfoById = {};
 var historyId = 0;
 var messageCount = 0;
-var historyUpdated = true;
+var historyLoaded = true;
 
 // проверка на мобильный браузер
 var isMobile = {
@@ -26,24 +26,34 @@ var isMobile = {
 };
 
 function getHistory(id) {
-    historyUpdated = false;
-    messageCount = 0;
-    delHistory()
-    var f_userid = 0;
-    f_userid = historyId;
-    if(id != undefined)
-    {
-        f_userid = id;
-        historyId = id;
-    }
-    console.log("Загрузка истории... [" + f_userid + "]");
-    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200');
+    historyLoaded = false;
+    deleteHistory();
+
+    console.log("Загрузка истории... [" + id + "]");
+    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + id + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200');
+    historyId = id;
 }
 
+function updateHistory() {
+
+    // если id чата нет - обновлять окно нельзя 
+    if(historyId == 0){
+        return;
+    }
+
+    historyLoaded = false;
+    deleteHistory()
+
+    console.log("Обновление истории... [" + historyId + "]");
+    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + historyId + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200');
+}
+
+
 function addHistory() {
-    f_userid = historyId;
-    console.log("Загрузка истории... [" + f_userid + "]");
-    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + f_userid + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200&offset=' + messageCount);
+    historyLoaded = false;
+
+    console.log("Загрузка истории... [" + historyId + "]");
+    addScript('https://api.vk.com/method/messages.getHistory?user_id=' + historyId + '&access_token=' + document.getElementById("access_token").value + '&callback=showMsg&count=200&offset=' + messageCount);
 }
 
 function addScript(src) {
@@ -60,7 +70,7 @@ function showMsg(data) {
         messageCount++;
     };
     console.log("История загружена!");   
-    historyUpdated = true;
+    historyLoaded = true;
 }
 
 function writeMessage(response, quote) {
@@ -89,7 +99,8 @@ function writeMessage(response, quote) {
         console.log("Прикрепленные объекты:" + response.attachments.length);
         if (response.attachments.length > 0) {
             for (var it = 0;  it <= response.attachments.length - 1; it++) {
-                if (response.attachments[it].type == 'photo') {
+
+                if (response.attachments[it].type == 'photo') {                 
                     var img = document.createElement("img")
                     img.src = response.attachments[it].photo.src;
                     img.alt = response.attachments[it].photo.src_big;
@@ -97,6 +108,11 @@ function writeMessage(response, quote) {
                     // Функция увелечения по клику
                     img.setAttribute("onclick", "javascript:getBigPhoto(this)");
                     document.getElementById("history").appendChild(img);
+
+                } else if (response.attachments[it].type == 'wall') {
+                    var urlpost = "https://new.vk.com/wall" + response.attachments[it].to_id 
+                                + "_" + response.attachments[it].id;
+                    p.appendChild("attach:" + urlpost);
                 }
             }
         }
@@ -115,13 +131,14 @@ function writeMessage(response, quote) {
     }
 }
 
-function delHistory() {
+function deleteHistory() {
     console.log("Удаление истории...");
     var element = document.getElementById("history");
     while (element.firstChild) {
         element.removeChild(element.firstChild);
     }
-    console.log("История удалена!");
+    messageCount = 0;
+    console.log("История удалена!");   
 }
 
 function delDialogs() {
@@ -136,12 +153,10 @@ function getBigPhoto(it) {
 }
 
 function setAccess_token() {
-
     console.log("Сохранение ключа...");
     var token = prompt();
     document.getElementById("access_token").value = token;
     document.cookie = "access_token=" + document.getElementById("access_token").value + "; path=/; expires=Tue, 19 Jan 2033 16:00:00 GMT";
-
 }
 
 function delAccess_token() {
