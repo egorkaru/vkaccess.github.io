@@ -110,8 +110,10 @@ function writeMessage(response, quote) {
                     document.getElementById("history").appendChild(img);
 
                 } else if (response.attachments[it].type == 'wall') {
-                    var urlpost = "attach: " + "https://new.vk.com/wall" + response.attachments[it].to_id 
-                                + "_" + response.attachments[it].id;
+                    var urlpost = name + " [attach]: " + "https://new.vk.com/wall" + 
+                                response.attachments[it].wall.to_id +
+                                "_" + response.attachments[it].wall.id;
+                                
                     var attach = document.createElement("p");
                     attach.innerHTML = urlpost;
                     document.getElementById("history").appendChild(attach);
