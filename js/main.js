@@ -115,8 +115,9 @@ function writeMessage(response, quote) {
                                 "_" + response.attachments[it].wall.id;
 
                     var attach = document.createElement("a");
-                    attach.innerHTML = urlpost;
+                    attach.innerHTML = urlpost + "<br>";
                     attach.href = urlpost;
+                    attach.style = "{color: blue;}";
                     document.getElementById("history").appendChild(attach);
                 }
             }
