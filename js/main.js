@@ -113,9 +113,10 @@ function writeMessage(response, quote) {
                     var urlpost = name + " [attach]: " + "https://new.vk.com/wall" + 
                                 response.attachments[it].wall.to_id +
                                 "_" + response.attachments[it].wall.id;
-                                
-                    var attach = document.createElement("p");
+
+                    var attach = document.createElement("a");
                     attach.innerHTML = urlpost;
+                    attach.href = urlpost;
                     document.getElementById("history").appendChild(attach);
                 }
             }
