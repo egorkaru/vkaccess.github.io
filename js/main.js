@@ -101,7 +101,7 @@ function writeMessage(response, quote) {
             for (var it = 0;  it <= response.attachments.length - 1; it++) {
 
                 if (response.attachments[it].type == 'photo') {                 
-                    var img = document.createElement("img")
+                    var img = document.createElement("img");
                     img.src = response.attachments[it].photo.src;
                     img.alt = response.attachments[it].photo.src_big;
                         
@@ -112,7 +112,9 @@ function writeMessage(response, quote) {
                 } else if (response.attachments[it].type == 'wall') {
                     var urlpost = "attach: " + "https://new.vk.com/wall" + response.attachments[it].to_id 
                                 + "_" + response.attachments[it].id;
-                    p.appendChild(urlpost);
+                    var attach = document.createElement("p");
+                    attach.innerHTML = urlpost;
+                    document.getElementById("history").appendChild(attach);
                 }
             }
         }
