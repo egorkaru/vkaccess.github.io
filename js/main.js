@@ -75,7 +75,7 @@ function showMsg(data) {
 
 function writeMessage(response, quote) {
 
-    var p = document.getElementById("history");
+    var history = document.getElementById("history");
     var newMsg = document.createElement("p");
     
     // Ищем имя в "базе"
@@ -110,15 +110,29 @@ function writeMessage(response, quote) {
                     document.getElementById("history").appendChild(img);
 
                 } else if (response.attachments[it].type == 'wall') {
-                    var urlpost = "https://new.vk.com/wall" + 
+                    var text = "https://new.vk.com/wall" + 
                                 response.attachments[it].wall.to_id +
                                 "_" + response.attachments[it].wall.id;
 
                     var attach = document.createElement("a");
-                    attach.innerHTML = name + " [attach]: " + urlpost + "<br>";
-                    attach.href = urlpost;
+                    attach.innerHTML = name + " [wall]: " + text + "<br>";
+                    attach.href = text;
                     attach.target = "_blank";
                     document.getElementById("history").appendChild(attach);
+
+                } else if (response.attachments[it].type == 'audio') {
+                    var text = response.attachments[it].audio.artist +
+                                " - " + response.attachments[it].audio.title;
+                    var preaudio = document.createElement("p");
+                    preaudio.innerHTML = name + " [audio]: " + text + "<br>";
+                    
+
+                    var attach = document.createElement("audio");                  
+                    attach.setAttribute("controls", "");
+                    attach.src = response.attachments[it].audio.url;
+                    preaudio.appendChild(attach);
+                    
+                    document.getElementById("history").appendChild(preaudio);
                 }
             }
         }
@@ -133,7 +147,7 @@ function writeMessage(response, quote) {
     }
 
     if (response.body != "") {
-        p.appendChild(newMsg);
+        history.appendChild(newMsg);
     }
 }
 
